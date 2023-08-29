@@ -8,9 +8,9 @@ const minutesElement = document.getElementById('minutes');
 const secondsElement = document.getElementById('seconds');
 const lastStartTimeElement = document.getElementById('last-start-time');
 
-let count = 0;
-let startTime = null;
-let countInterval = null; // To store the interval reference
+let count = parseFloat(localStorage.getItem('count')) || 0;
+let startTime = parseFloat(localStorage.getItem('startTime')) || null;
+let countInterval = null;
 const increment = 0.00092708;
 
 function updateCounter() {
@@ -29,13 +29,14 @@ function updateCounter() {
 }
 
 function startCountup() {
-  startTime = new Date().getTime();
-  lastStartTimeElement.textContent = `Last Start: ${new Date(startTime).toLocaleString()}`;
+  startTime = parseFloat(localStorage.getItem('startTime')) || new Date().getTime();
+  localStorage.setItem('startTime', startTime);
 
   countInterval = setInterval(() => {
     count += increment;
     countElement.textContent = count.toFixed(8);
     updateCounter();
+    localStorage.setItem('count', count);
   }, 1000);
 
   startButton.disabled = true;
@@ -53,7 +54,13 @@ function resetCountup() {
   lastStartTimeElement.textContent = 'Last Start: Not started yet';
   startButton.disabled = false;
   resetButton.disabled = true;
-  countInterval = null; // Clear the interval reference
+  countInterval = null;
+  localStorage.removeItem('count');
+  localStorage.removeItem('startTime');
+}
+
+if (startTime) {
+  startCountup();
 }
 
 startButton.addEventListener('click', startCountup);
