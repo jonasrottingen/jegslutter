@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Count-Up Timer</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>Penger spart siden start</h1>
+  <div class="time-counter" id="time-counter">
+    <span id="days">0</span> days
+    <span id="hours">0</span> hours
+    <span id="minutes">0</span> minutes
+    <span id="seconds">0</span> seconds
+  </div>
+  <div class="last-start-time" id="last-start-time">
+    Last Start: Not started yet
+  </div>
+  <div class="timer">
+    <span id="count">0.00000000</span>
+    <span class="currency">kroner</span>
+  </div>
+  <div class="buttons">
+    <button id="start-button">Start</button>
+    <button id="reset-button" disabled>Reset</button>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
